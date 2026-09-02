@@ -1,0 +1,23 @@
+## IDF Component Manager Manifest File
+##
+## Panel and touch drivers for every profile in board_config.h are listed here
+## so the friend receiving this project never has to hunt for a component.
+## Unused ones cost a little build time and nothing in the final binary.
+dependencies:
+  idf:
+    version: ">=5.0"
+
+  # --- LVGL core + Espressif's LVGL <-> esp_lcd glue ---
+  lvgl/lvgl: "^9.0.0"
+  espressif/esp_lvgl_port: "^2.3.0"
+
+  # --- SPI panel drivers (ST7789 + NT35510 + SSD1306 are built into esp_lcd) ---
+  espressif/esp_lcd_ili9341: "^2.1.0"
+  espressif/esp_lcd_gc9a01: "^2.0.4"
+  espressif/esp_lcd_st7796: "^1.4.0"
+
+  # --- Touch: base layer + the three common I2C controllers ---
+  espressif/esp_lcd_touch: "^1.2.1"
+  espressif/esp_lcd_touch_gt911: "^1.2.1"
+  espressif/esp_lcd_touch_ft5x06: "^1.1.1"
+  espressif/esp_lcd_touch_cst816s: "^1.1.2"

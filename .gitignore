@@ -1,0 +1,9 @@
+build/
+managed_components/
+sdkconfig
+sdkconfig.old
+compile_commands.json
+.vscode/
+*.swp
+sim/lvgl/
+sim/build/

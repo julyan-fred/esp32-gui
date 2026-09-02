@@ -1,0 +1,14 @@
+# ---- Single source of truth for the chip target ----
+# Change this one line, then run the "ESP-IDF: Set Target" task
+# (or: idf.py fullclean && idf.py set-target <chip>)
+CONFIG_IDF_TARGET="esp32s3"
+
+# ---- Baseline for LVGL UI work ----
+# 1 kHz tick keeps lv_timer_handler() smooth; LVGL assumes ms resolution.
+CONFIG_FREERTOS_HZ=1000
+
+# ---- Board-specific: uncomment to match YOUR hardware ----
+# CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
+# CONFIG_SPIRAM=y
+# CONFIG_SPIRAM_MODE_OCT=y
+# CONFIG_SPIRAM_SPEED_80M=y

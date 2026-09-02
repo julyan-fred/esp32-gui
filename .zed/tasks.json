@@ -1,0 +1,89 @@
+// Zed task definitions for this ESP-IDF workspace.
+// Run with: cmd-shift-p -> "task: spawn", or bind a key to `task::Spawn`.
+//
+// Every task sources the IDF export script first, because Zed's task shell is
+// NOT the shell you ran `get_idf` / `. $IDF_PATH/export.sh` in.
+// If your IDF lives somewhere other than ~/esp/esp-idf, either export IDF_PATH
+// in your shell profile or edit the fallback path below.
+[
+  {
+    "label": "ESP-IDF: Build",
+    "command": "source \"${IDF_PATH:-$HOME/esp/esp-idf}/export.sh\" >/dev/null && idf.py build",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "ESP-IDF: Flash",
+    "command": "source \"${IDF_PATH:-$HOME/esp/esp-idf}/export.sh\" >/dev/null && idf.py flash",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "ESP-IDF: Flash + Monitor",
+    "command": "source \"${IDF_PATH:-$HOME/esp/esp-idf}/export.sh\" >/dev/null && idf.py flash monitor",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "ESP-IDF: Monitor",
+    "command": "source \"${IDF_PATH:-$HOME/esp/esp-idf}/export.sh\" >/dev/null && idf.py monitor",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "ESP-IDF: Menuconfig",
+    "command": "source \"${IDF_PATH:-$HOME/esp/esp-idf}/export.sh\" >/dev/null && idf.py menuconfig",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "ESP-IDF: Set Target (from sdkconfig.defaults)",
+    "command": "source \"${IDF_PATH:-$HOME/esp/esp-idf}/export.sh\" >/dev/null && TARGET=$(sed -n 's/^CONFIG_IDF_TARGET=\"\\(.*\\)\"$/\\1/p' sdkconfig.defaults) && echo \"Setting target: $TARGET\" && idf.py fullclean && idf.py set-target \"$TARGET\"",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "ESP-IDF: Fullclean",
+    "command": "source \"${IDF_PATH:-$HOME/esp/esp-idf}/export.sh\" >/dev/null && idf.py fullclean",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "ESP-IDF: Link compile_commands.json (clangd)",
+    "command": "ln -sf build/compile_commands.json compile_commands.json && ls -l compile_commands.json",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Sim: Build + Run (desktop LVGL)",
+    "command": "cmake -B build -G Ninja . && ninja -C build && ./build/sim",
+    "cwd": "$ZED_WORKTREE_ROOT/sim",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Sim: Reconfigure (change panel size)",
+    "command": "rm -rf build && cmake -B build -G Ninja -DSIM_HOR_RES=${SIM_HOR_RES:-240} -DSIM_VER_RES=${SIM_VER_RES:-320} -DSIM_ZOOM=${SIM_ZOOM:-2} .",
+    "cwd": "$ZED_WORKTREE_ROOT/sim",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  }
+]

@@ -1,0 +1,13 @@
+# GCC flags the Xtensa/RISC-V cross-compilers emit that clangd cannot parse.
+# Without this, Zed's LSP reports "unknown argument" on every ESP-IDF file.
+# Verified against build/compile_commands.json for the esp32s3 target.
+CompileFlags:
+  Remove:
+    - -fno-shrink-wrap            # 1714 TUs
+    - -fno-tree-switch-conversion # 1714 TUs
+    - -fstrict-volatile-bitfields # 1714 TUs
+    - -fuse-cxa-atexit            # 91 TUs (C++)
+    - -mlongcalls                 # 1715 TUs
+    # Not emitted for esp32s3, but appear on other targets:
+    - -mtext-section-literals
+    - -mdisable-hardware-atomics

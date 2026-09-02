@@ -1,0 +1,5 @@
+## Declaring lvgl here is what puts it on this component's REQUIRES list.
+## Do NOT hand-write `REQUIRES lvgl` - managed components are namespaced
+## `lvgl__lvgl` and the plain name will not resolve.
+dependencies:
+  lvgl/lvgl: "^9.0.0"

@@ -1,0 +1,21 @@
+{
+  // clangd must be told it may interrogate the ESP-IDF cross-compilers, or it
+  // cannot resolve their builtin headers (stddef.h, stdint.h, ...) and reports
+  // spurious "file not found" errors across the whole project.
+  "lsp": {
+    "clangd": {
+      "binary": {
+        "arguments": [
+          "--query-driver=/Users/*/.espressif/tools/**/bin/*-elf-gcc",
+          "--background-index",
+          "--header-insertion=never",
+          "--clang-tidy"
+        ]
+      }
+    }
+  },
+  "languages": {
+    "C": { "format_on_save": "off" },
+    "C++": { "format_on_save": "off" }
+  }
+}
